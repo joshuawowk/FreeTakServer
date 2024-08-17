@@ -7,16 +7,16 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - free-tak-core-db:/opt/fts/
+      - /portainer/Files/AppData/Config/fts:/opt/fts/
     ports:
       # DataPackagePort
-      - 8080:8080
+      - ${DataPackagePort}:8080
       # CoTPort
-      - 8087:8087
+      - ${CoTPort}:8087
       # SSLCoTPort
-      - 8089:8089
+      - ${SSLCoTPort}:8089
       # SSLDataPackagePort
-      - 8443:8443
+      - ${SSLDataPackagePort}:8443
       # FederationPort
       #- 9000:9000
       # APIPort - Don't expose by default
@@ -24,17 +24,17 @@ services:
 
     environment:
         # The ChangeMe section
-        FTS_FED_PASSWORD: "defaultpass"
-        FTS_CLIENT_CERT_PASSWORD: "password"
-        FTS_SECRET_KEY: "vnkdjnfjknfl1232#"
-        FTS_NODE_ID: "fl5m8j5txlgdtfv8wi96zf8tt0howddo"
-        FTS_CONNECTION_MESSAGE: "Welcome to FreeTAKServer. The Parrot is not dead. It’s just resting"
+        FTS_FED_PASSWORD: ${FTS_FED_PASSWORD}
+        FTS_CLIENT_CERT_PASSWORD: ${FTS_CLIENT_CERT_PASSWORD}
+        FTS_SECRET_KEY: ${FTS_SECRET_KEY}
+        FTS_NODE_ID: ${FTS_NODE_ID}
+        FTS_CONNECTION_MESSAGE: ${FTS_CONNECTION_MESSAGE}
 
         # Networking
-        FTS_COT_PORT: 8087
-        FTS_SSLCOT_PORT: 8089
-        FTS_API_PORT: 19023
-        FTS_FED_PORT: 9000
+        FTS_COT_PORT: ${FTS_COT_PORT}
+        FTS_SSLCOT_PORT: ${FTS_SSLCOT_PORT}
+        FTS_API_PORT: ${FTS_API_PORT}
+        FTS_FED_PORT: ${FTS_FED_PORT}
 
         FTS_DP_ADDRESS: 127.0.0.1
         FTS_USER_ADDRESS: 127.0.0.1
@@ -68,5 +68,5 @@ services:
         FTS_EMERGENCY_RADIUS: 0 # radius of emergency within-which users will receive it
         FTS_LOG_LEVEL: "info"
 
-volumes:
-  free-tak-core-db:
+# volumes:
+#   free-tak-core-db:
