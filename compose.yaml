@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - /portainer/Files/AppData/Config/fts:/opt/fts/
+      - /portainer/Files/AppData/Config/fts:/opt/fts
     ports:
       # DataPackagePort
       - ${DataPackagePort}:8080
@@ -22,19 +22,24 @@ services:
       # APIPort - Don't expose by default
       #- 19023:19023
 
-#     environment:
-#         # The ChangeMe section
-#         FTS_FED_PASSWORD: ${FTS_FED_PASSWORD}
-#         FTS_CLIENT_CERT_PASSWORD: ${FTS_CLIENT_CERT_PASSWORD}
-#         FTS_SECRET_KEY: ${FTS_SECRET_KEY}
-#         FTS_NODE_ID: ${FTS_NODE_ID}
-#         FTS_CONNECTION_MESSAGE: ${FTS_CONNECTION_MESSAGE}
+    environment:
+        # Networking
+        FTS_COT_PORT: 12887
+        FTS_SSLCOT_PORT: 12889
+        FTS_API_PORT: 12923
+        FTS_FED_PORT: 12090
+        FTS_OPTIMIZE_API: True
+        FTS_DATA_RECEPTION_BUFFER: 1024
+        FTS_MAX_RECEPTION_TIME: 4
+        FTS_NUM_ROUTING_WORKERS: 3
+        FTS_COT_TO_DB: True
+        FTS_MAINLOOP_DELAY: 100
+        FTS_EMERGENCY_RADIUS: 0 # radius of emergency within-which users will receive it
+        FTS_LOG_LEVEL: "info"
 
-#         # Networking
-#         FTS_COT_PORT: 12887
-#         FTS_SSLCOT_PORT: 12889
-#         FTS_API_PORT: 12923
-#         FTS_FED_PORT: 12090
+networks:
+  bridge:
+    driver: bridge
 
 #         FTS_DP_ADDRESS: 127.0.0.1
 #         FTS_USER_ADDRESS: 127.0.0.1
@@ -55,18 +60,7 @@ services:
 #         FTS_INTEGRATION_MANAGER_PUBLISHER_PORT: 19034 # port from which to publish messages by the integration manager
 #         FTS_INTEGRATION_MANAGER_PUBLISHER_ADDRESS: 127.0.0.1 # address from which to publish messages by the integration manager
 
-#         # Misc Settings
-#         FTS_OPTIMIZE_API: True
-#         FTS_DATA_RECEPTION_BUFFER: 1024
-#         FTS_MAX_RECEPTION_TIME: 4
-#         FTS_NUM_ROUTING_WORKERS: 3
-#         FTS_COT_TO_DB: True
-#         # number of milliseconds to wait between each iteration of main loop
-#         # decreasing will increase CPU usage and server performance
-#         # increasing will decrease CPU usage and server performance
-#         FTS_MAINLOOP_DELAY: 100
-#         FTS_EMERGENCY_RADIUS: 0 # radius of emergency within-which users will receive it
-#         FTS_LOG_LEVEL: "info"
 
 # # volumes:
 # #   free-tak-core-db:
+  
