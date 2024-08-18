@@ -1,13 +1,10 @@
 services:
   freetakserver:
-    image: freetakserver:latest
-    pull_policy: build
+    image: fts:local
+    pull_policy: if_not_present
     restart: unless-stopped
-    build:
-      context: .
-      dockerfile: Dockerfile
     volumes:
-      - /portainer/Files/AppData/Config/fts:/opt/fts
+      - /portainer/Files/AppData/Config/fts:/opt/fts/
     ports:
       # DataPackagePort
       - ${DataPackagePort}:8080
@@ -20,7 +17,7 @@ services:
       # FederationPort
       #- 9000:9000
       # APIPort - Don't expose by default
-      #- 19023:19023
+      - ${APIPort}:19023
 
     environment:
         # Networking
