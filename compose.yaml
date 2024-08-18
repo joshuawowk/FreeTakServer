@@ -1,7 +1,11 @@
 services:
   freetakserver:
     image: freetakserver:latest
+    pull_policy: build
     restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - /portainer/Files/AppData/Config/fts:/opt/fts/
     ports:
