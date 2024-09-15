@@ -24,9 +24,9 @@ services:
 
     environment:
         # The ChangeMe section
-        FTS_FED_PASSWORD: "sitREP88*"
-        FTS_CLIENT_CERT_PASSWORD: "sitREP88*"
-        FTS_SECRET_KEY: "sitREP88*"
+        FTS_FED_PASSWORD: ${FTS_FED_PASSWORD}
+        FTS_CLIENT_CERT_PASSWORD: ${FTS_CLIENT_CERT_PASSWORD}
+        FTS_SECRET_KEY: ${FTS_SECRET_KEY}
         FTS_NODE_ID: "vampir"
         FTS_CONNECTION_MESSAGE: "Welcome to Vampir. The Parrot is not dead. It’s just resting"
 
